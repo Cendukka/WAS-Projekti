@@ -41,9 +41,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-const csrfMiddleware = csurf({
-  cookie: true
-});
+
+// const csrfMiddleware = csurf({
+//   cookie: true,
+// });
+
+
+
+const csrfMiddleware = csurf({cookie: {
+    httpOnly: true,
+  }});
 
 app.use(csrfMiddleware);
 
