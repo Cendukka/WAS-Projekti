@@ -7,7 +7,6 @@ function createAnnouncement() {
     const category = Array.from(document.getElementsByName("categoryRadio")).find(r => r.checked).value;
 
 
-    console.log(token)
     axios.post('/api/announcement/', {
         name: name,
         email: email,
@@ -18,8 +17,7 @@ function createAnnouncement() {
         headers: {"X-CSRF-Token": token}
     })
         .then(function (response) {
-            // location.href = '/todo';
-            console.log(response)
+            // location.href = '/someWhere';
         })
         .catch(function (error) {
             if (error.response.data.error && error.response.data.error.code === 'EBADCSRFTOKEN') {
