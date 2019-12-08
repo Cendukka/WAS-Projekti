@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const csurf = require('csurf');
 const _ = require('lodash');
 const {validate, Announcement} = require('../models/announcement');
 
@@ -21,6 +22,7 @@ router.get('/', async (req, res) => {
 
 
 router.post('/', async (req, res) => {
+    console.log(req.cookies);
     const validateAnnouncement = validate(req.body);
     if (validateAnnouncement.error !== null) {
         res.status(400).send(validateAnnouncement.error.details[0].message)
@@ -33,7 +35,10 @@ router.post('/', async (req, res) => {
                 'content',
                 'category',
                 'expirationDate',]))))
-            .catch(_ => res.status(404).send(_));
+            .catch(_ => {
+                console.log(_);
+                return res.status(404).send(_);
+            });
     }
 });
 

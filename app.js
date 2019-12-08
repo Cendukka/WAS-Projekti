@@ -2,10 +2,12 @@ const env = require('dotenv').config();
 const helmet = require('helmet');
 const createError = require('http-errors');
 const express = require('express');
+const csurf = require('csurf');
 const mongoose = require('mongoose');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+
 
 const indexRouter = require('./routes/index');
 const announcementRouter = require('./routes/announcement');
@@ -24,6 +26,9 @@ mongoose.connect(process.env.mongoDBUrl)
     .catch(err => console.error('Could not connect to MongoDB...'));
 
 
+
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -32,11 +37,19 @@ app.use(helmet());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+const csrfMiddleware = csurf({
+  cookie: true
+});
+
+app.use(csrfMiddleware);
+
 app.use('/', indexRouter);
 app.use('/api/announcement', announcementRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -66,7 +79,7 @@ app.use(function (err, req, res, next) {
   //     return res.render('error');
   // }
 
-  res.status(404).redirect('login');
+  res.status(404).redirect('/create');
 
 
 });
