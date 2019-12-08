@@ -1,0 +1,46 @@
+
+<div class="data-form">
+  <form action="/reserve/new" method="POST">
+    <h2>Luo uusi varaus:</h2>
+    <label for="inputName">Nimi:</label>
+    <input type="text" name="name" id="inputName"  placeholder="Nimesi" autofocus required>
+
+    <label for="inputSport">Laji:</label>
+    <select name="sport" id="inputSport" required>
+      <option type="text" value="Sulkapallo">Sulkapallo</option>
+      <option type="text" value="Koripallo">Koripallo</option>
+      <option type="text" value="Sähly">Sähly</option>
+      <option type="text" value="Tennis">Tennis</option>
+      <option type="text" value="Jalapallo">Jalkapallo</option>
+    </select>
+    
+    
+    <label for="inputSport">Päivämäärä:</label>
+    <input type="date" name="date" id="inputDate"  placeholder="Päivämäärä" required>
+
+    <label for="inputPassword">Aloitus aika</label>
+    <select name="startTime" required>
+      <option type="number" value="12">12</option>
+      <option type="number" value="13">13</option>
+      <option type="number" value="14">14</option>
+      <option type="number" value="15">15</option>
+      <option type="number" value="16">16</option>
+      <option type="number" value="17">17</option>
+      <option type="number" value="18">18</option>
+    </select>
+
+    <label for="inputEmail">Lopetus aika: </label>
+    <select name="endTime">
+      <option type="number" value="13">13</option>
+      <option type="number" value="14">14</option>
+      <option type="number" value="15">15</option>
+      <option type="number" value="16">16</option>
+      <option type="number" value="17">17</option>
+      <option type="number" value="18">18</option>
+      <option type="number" value="19">19</option>
+    </select>
+
+    <br>
+    <br>
+    <button type="submit">Varaa</button>
+  </form>
