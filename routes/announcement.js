@@ -7,7 +7,6 @@ const {validate, Announcement} = require('../models/announcement');
 /* GET announcement listing. */
 router.get('/', async (req, res) => {
     const announcementsDocs = await Announcement.find({});
-
     const announcements = announcementsDocs.map(({name, email, content, category, expirationDate,}) => ({
         name,
         email,
