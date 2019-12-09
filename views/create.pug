@@ -1,0 +1,42 @@
+extends layout.pug
+
+block content
+    - const date = new Date();
+    - const today = `${date.getFullYear()}-${date.getMonth()}-${("0" + date.getDate()).slice(-2)}`;
+    div.container
+        div.row
+            div.col-md-12.min-vh-100.d-flex.flex-column.justify-content-center
+                div.row
+                    div.col-lg-6.col-md-8.mx-auto
+                        div.card.rounded.shadow.shadow-sm
+                            div.card-header
+                                h3.mb-0 Create announcement
+                            div.card-body
+                                div.form-group
+                                    label(for="name") Name
+                                    input(type="text" class="form-control" id="name" name="name" placeholder="Name" required="required")
+                                div.form-group
+                                    label(for="email") Email
+                                    input(type="email" class="form-control" id="email" name="email" placeholder="a@b.com" required="required")
+                                div.form-group
+                                    textarea.form-control(id="content", cols="30", rows="3" placeholder="Dii dii...")
+                                div
+                                div.form-group
+                                    label(for='mCategory') Category
+                                    #mCategory.form-control
+                                        label.radio-inline.mr-3
+                                            input(type='radio' name='categoryRadio' value="buying" checked)
+                                            | Buying
+                                        label.radio-inline
+                                            input(type='radio' name='categoryRadio' value="selling")
+                                            | Selling
+                                div
+                                .form-group
+                                    label(for='expire-time') Expire date
+                                    input#expire-time.form-control(type='date' min=`${today}` value=`${today}` name="expirationDate")
+
+                                input(type='hidden' id="token" value=`${token}`)
+                                if error
+                                    div.alert.alert-danger #{error}
+                                button.btn.btn-success.float-right(onclick='createAnnouncement()') Create
+                                a.btn.btn-info(href='api/announcement' role='button') Show Announcements
