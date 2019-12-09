@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const csurf = require('csurf');
 const _ = require('lodash');
+const moment = require('moment');
 const {validate, Announcement} = require('../models/announcement');
 
 /* GET announcement listing. */
@@ -28,7 +29,9 @@ router.get('/', async (req, res) => {
         emails.push(a.email);
         contents.push(a.content);
         categories.push(a.category);
-        expirationDates.push(a.expirationDate);
+        let unformatedDate = moment(a.expirationDate);
+        let formatedDate = unformatedDate.format("DD/MM/YYYY");
+        expirationDates.push(formatedDate);
     })
    
     res.status(200).render("show",{
