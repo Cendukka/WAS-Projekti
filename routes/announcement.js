@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const csurf = require('csurf');
 const _ = require('lodash');
-const moment = require('moment');
 const {validate, Announcement} = require('../models/announcement');
 
 /* GET announcement listing. */
@@ -17,30 +15,8 @@ router.get('/', async (req, res) => {
     }));
 
     if (!announcements) return res.status(400).send('No announcements found');
-    //res.status(200).send(announcements);
-    let names = [];
-    let emails = [];
-    let contents = [];
-    let categories = [];
-    let expirationDates = [];
+    res.status(200).send(announcements);
 
-    announcements.forEach(a => {
-        names.push(a.name);
-        emails.push(a.email);
-        contents.push(a.content);
-        categories.push(a.category);
-        let unformatedDate = moment(a.expirationDate);
-        let formatedDate = unformatedDate.format("DD/MM/YYYY");
-        expirationDates.push(formatedDate);
-    })
-   
-    res.status(200).render("show",{
-        names: names,
-        emails: emails,
-        contents: contents,
-        categories: categories,
-        expirationDates: expirationDates
-    });
 });
 
 

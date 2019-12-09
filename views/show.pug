@@ -3,21 +3,21 @@ extends layout.pug
 block content
     div.container
         div.row
-            h1 Ilmoitukset
-            table.table
+            h1 Announcements
+            table.table.table-striped.table-responsive
                 thead
                     tr
-                        th Nimi
-                        th Sähköposti
-                        th Sisältö
-                        th Kategoria
-                        th Päättymis aika
+                        th Name
+                        th Email
+                        th Content
+                        th Category
+                        th Expiration date
                 tbody
-                    - for ( i=0; i <= names.length; i++ )
+                    each announcement in announcements
                         tr
-                            th= names[i]
-                            td= emails[i]
-                            td= contents[i]
-                            td= categories[i]
-                            td= expirationDates[i]
+                            th= announcement.name
+                            td= announcement.email
+                            td= announcement.content
+                            td= announcement.category
+                            td= announcement.expirationDate
             a.btn.btn-info(href='/create' role='button') Go to Create announcement
