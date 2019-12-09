@@ -86,7 +86,7 @@ app.use(function (err, req, res, next) {
   //     return res.render('error');
   // }
 
-  res.status(404).redirect('/create');
+  res.status(404).redirect('/view');
 
 
 });
