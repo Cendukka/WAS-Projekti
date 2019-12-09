@@ -7,7 +7,6 @@ const {validate, Announcement} = require('../models/announcement');
 /* GET announcement listing. */
 router.get('/', async (req, res) => {
     const announcementsDocs = await Announcement.find({});
-
     const announcements = announcementsDocs.map(({name, email, content, category, expirationDate,}) => ({
         name,
         email,
@@ -17,7 +16,13 @@ router.get('/', async (req, res) => {
     }));
 
     if (!announcements) return res.status(400).send('No announcements found');
-    res.status(200).send(announcements);
+    res.status(200).render("announcements", {
+        name: announcements.name,
+        email: announcements.email,
+        content: announcements.content,
+        category: announcements.category,
+        expirationDate: announcements.expirationDate
+    });
 });
 
 
