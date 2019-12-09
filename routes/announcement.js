@@ -17,7 +17,28 @@ router.get('/', async (req, res) => {
     }));
 
     if (!announcements) return res.status(400).send('No announcements found');
-    res.status(200).send(announcements);
+    //res.status(200).send(announcements);
+    let names = [];
+    let emails = [];
+    let contents = [];
+    let categories = [];
+    let expirationDates = [];
+
+    announcements.forEach(a => {
+        names.push(a.name);
+        emails.push(a.email);
+        contents.push(a.content);
+        categories.push(a.category);
+        expirationDates.push(a.expirationDate);
+    })
+   
+    res.status(200).render("show",{
+        names: names,
+        emails: emails,
+        contents: contents,
+        categories: categories,
+        expirationDates: expirationDates
+    });
 });
 
 

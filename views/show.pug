@@ -1,0 +1,23 @@
+extends layout.pug
+
+block content
+    div.container
+        div.row
+            h1 Ilmoitukset
+            table.table
+                thead
+                    tr
+                        th Nimi
+                        th Sähköposti
+                        th Sisältö
+                        th Kategoria
+                        th Päättymis aika
+                tbody
+                    - for ( i=0; i <= names.length; i++ )
+                        tr
+                            th= names[i]
+                            td= emails[i]
+                            td= contents[i]
+                            td= categories[i]
+                            td= expirationDates[i]
+            a.btn.btn-info(href='/create' role='button') Go to Create announcement
